@@ -1,9 +1,9 @@
-const { Pool } = require('pg')
-// create a different url using ElephantSQL.
-let url = 'postgres://qjfbqnie:1ZZ5p3UdKfV-Z31hgTCWSs28dnijXFDW@raja.db.elephantsql.com:5432/qjfbqnie'
+const { Pool } = require('pg');
+require('dotenv').config();
+let url = process.env.DB_LINK;
 const pool = new Pool({
-    connectionString: url,
-  });
+  connectionString: url,
+});
 
 // // creating table of users
 // pool.query('CREATE TABLE IF NOT EXISTS users (_id SERIAL PRIMARY KEY, name VARCHAR, apt_id INTEGER, role VARCHAR, pwd VARCHAR)', (err, result)=>{
@@ -32,6 +32,8 @@ const pool = new Pool({
 // });
 
 //exporting query function for server requests
-module.exports = {query: (text, params, callback)=>{
-    return pool.query(text, params, callback)
-}};
+module.exports = {
+  query: (text, params, callback) => {
+    return pool.query(text, params, callback);
+  },
+};
